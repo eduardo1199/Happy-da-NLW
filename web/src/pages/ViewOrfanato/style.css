@@ -1,0 +1,133 @@
+.ViewOrfanato{
+    height: 100vw;
+    display: flex;
+}
+.ViewOrfanato aside{
+    display: flex;
+    height: 100%;
+    position: fixed;
+    padding: 50px;
+    width: 130px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(329.54deg,#29B6D1 0%, #00C7C7 100%);
+}
+.ViewOrfanato aside img{
+    width: 70px;
+    height: 70px;
+}
+.ViewOrfanato aside a{
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #159fd6;
+}
+.ViewOrfanato .container-ViewOrfanato{
+    width: 500px;
+    height: auto;
+    margin: 50px auto 50px auto;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+}
+.ViewOrfanato .container-ViewOrfanato #image-principal{
+    width: 100%;
+    border-radius: 20px 20px 0px 0px;
+    object-fit: cover;
+}
+.ViewOrfanato .container-ViewOrfanato #imgs-container{
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+}
+.ViewOrfanato .container-ViewOrfanato #imgs-container button{
+    display: flex;
+    border: none;
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+}
+.ViewOrfanato .container-ViewOrfanato #imgs-container img{
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+}
+.ViewOrfanato .container-ViewOrfanato h1{
+    color: gray;
+    text-align: center;
+}
+.ViewOrfanato .container-ViewOrfanato p{
+    color: rgb(153, 153, 153);
+    font-weight: 800;
+    padding: 10px;
+    font-size: 15px;
+    text-align: center;
+}
+.ViewOrfanato .container-ViewOrfanato .container-map{
+    margin-top: 50px;
+}
+.ViewOrfanato .container-ViewOrfanato .leaflet-container{
+    z-index: 5;
+    margin-top:20px;
+}
+.ViewOrfanato .container-ViewOrfanato .container-map footer{
+    background: hsl(0, 0%, 73%);
+    display: flex;
+    transition: background-color 0.2s;
+    border-radius: 0px 0px 20px 20px;
+}
+.ViewOrfanato .container-ViewOrfanato .container-map footer:hover{
+    background: #29B6D1;
+}
+.ViewOrfanato .container-ViewOrfanato .container-map footer a{
+    width: 100%;
+    margin: auto;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    font-weight: 800;
+    color: rgb(255, 255, 255);
+}
+.ViewOrfanato .container-ViewOrfanato .container-contato{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.ViewOrfanato .container-ViewOrfanato #horario-container{
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: space-around;
+}
+.ViewOrfanato .container-ViewOrfanato #horario-container #horario-view{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: linear-gradient(329.54deg,#c1f5ff 0%, #ffffff 100%);
+    width: 200px;
+    height: 130px;
+    border-radius: 20px;
+}
+.container-ViewOrfanato #button-contato{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    text-decoration: none;
+    font-weight: 800;
+    color: white;
+    background:rgb(96, 223, 96);
+    border-radius: 20px;
+    outline: none;
+}

@@ -1,0 +1,61 @@
+.login-container{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(329.54deg,#29B6D1 0%, #00C7C7 100%);
+
+    display: flex;
+    justify-content: center; /*alinhar itens horizontal*/                    
+    align-items: center;/*alinhar itens vertical*/
+}
+.login-container #ajus-login{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    max-width: 1100px;
+    max-height: 1100px;
+    
+}
+.login-container form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.login-container form strong{
+    font-size: 25px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+.login-container form input{
+    width: 300px;
+    height: 40px;
+    border-radius: 7px;
+    border: none;
+}
+.login-container form footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.login-container #Register-User{
+    text-decoration: none;
+    font-size: 16px;
+    color:#1974be;
+    font-weight: 800;
+}
+.login-container #Login-User{
+    display: flex;
+    margin-top: 40px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color: #ffd666;
+    border-radius: 7px;
+    border: none;
+    padding: 10px;
+    color: gray;
+    transition: background-color 0.6s;
+}
+.login-container #Login-User:hover{
+    background: #1974be;
+}

@@ -1,0 +1,87 @@
+.cad-container{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(329.54deg,#29B6D1 0%, #00C7C7 100%);
+
+    display: flex;
+    justify-content: center; /*alinhar itens horizontal*/                    
+    align-items: center;/*alinhar itens vertical*/
+}
+.cad-container img{
+    width: 50%;
+}
+.cad-container form{
+    width: 100%;
+    justify-content: center;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.cad-container header strong{
+    font-weight: 800;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+}
+.cad-container #form-cadUsuario{
+    margin: 30px 0 30px 0;
+    display: grid;
+    grid-template-columns: auto;
+}
+.cad-container #form-cadUsuario label{
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: 700;
+}
+.cad-container #form-cadUsuario input{
+    height: 40px;
+    border: none;
+    border-radius: 7px;
+    padding: 2px;
+}
+.cad-container p{
+    font-weight: 800;
+}
+.cad-container form footer{
+    display: flex;
+    justify-content: space-between;
+}
+.cad-container form footer #image-container{
+    display: grid;
+    grid-template-columns: repeat(2 , 1fr);
+}
+.cad-container form footer #image-container label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background-color: rgb(226, 226, 226);
+    border-radius: 20px;
+}
+.cad-container form footer #image-container img{
+    object-fit: cover;
+    border-radius: 15px;
+    width: 60px;
+    margin-left: 20px;
+}
+.cad-container form footer #input-image{
+    display: none;
+}
+#button-cadastro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    font-weight: 800;
+    color: white;
+    background-color: #1974be;
+    padding: 15px;
+    border-radius: 15px;
+    transition: background-color 0.6s;
+}
+#button-cadastro:hover{
+    background: #00C7C7;
+}

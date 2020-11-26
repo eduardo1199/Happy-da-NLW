@@ -1,0 +1,86 @@
+#page-landing{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(329.54deg,#29B6D1 0%, #00C7C7 100%);
+
+    display: flex;
+    justify-content: center; /*alinhar itens horizontal*/                    
+    align-items: center;/*alinhar itens vertical*/
+}
+#page-landing .container-landing{
+    position: relative; /*posição relativa das divs ou items dentro da div*/
+    width: 100%;
+    max-width: 1100px;
+    height: 100%;
+    max-height: 500px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background: url('../../imags/Ilustra02.svg') no-repeat 70% center;
+    background-size: 450px 450px;
+}
+#page-landing .container-landing-2{
+    position: absolute; 
+    top:0;
+    right: 0;
+
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    line-height: 30px;
+}
+#page-landing .container-landing-2 span{
+    text-align: end;
+    font-weight: 900;
+
+}
+#page-landing #button-login-in{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: 66px;
+    height: 66px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffd666;
+    border-radius: 20px;
+    transition: background-color 0.5s;
+}
+#page-landing #button-cad-Orfanato{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 70px;
+    width: 66px;
+    height: 66px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    transition: background-color 0.5s;
+}
+#page-landing #button-cad-Orfanato:hover{
+    background: #96FEFF;
+}
+#page-landing #button-login-in:hover{
+    background: #96FEFF;
+}
+#page-landing .container-landing main h1{
+    max-width: 350px;
+    font-size: 50px;
+    font-weight: 900;
+    line-height: 60px;
+}
+#page-landing .container-landing main p{
+    max-width: 350px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 20px;
+    margin-top: 60px;
+}
