@@ -1,13 +1,14 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import './style.css';
 import 'leaflet/dist/leaflet.css';
 import Logo1 from '../../imags/logo1.svg';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {FiArrowLeft, FiClock} from 'react-icons/fi';
 import {RiWhatsappLine} from 'react-icons/ri'
 import imgOrfanato from '../../imags/download.jpeg';
 import leaflet from 'leaflet';
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet';
+import api from '../../services/api';
 
 
 const Icon = leaflet.icon({
@@ -16,8 +17,38 @@ const Icon = leaflet.icon({
     iconAnchor:[15,30],
     popupAnchor:[135, 25]
 })
+interface Orfanato{
+    id:string;
+    name:string;
+    latitude:number;
+    longitude:number;
+    about: string;
+    instructions: string;
+    opening: string,
+    openorfanato: boolean;
+    images:{
+        id:number;
+        url:string;
+    }[];
+}
+interface OrfanatoParms{
+    id: string;
+}
+
 
 export default function ViewOrfanato(){
+    const parms = useParams<OrfanatoParms>();
+    const [indeximage, setindeximage] = useState(0);
+    const [Orfanato, setOrfanato] = useState<Orfanato>();
+    useEffect(()=>{ 
+        api.get(`listOrfanatos/${parms.id}`).then(response => {
+           setOrfanato(response.data);
+        })
+    },[parms.id]);
+    if(!Orfanato){
+        return <p>Carregando...</p>
+    }
+    
     return(
         <div className="ViewOrfanato">
             <aside>
@@ -29,29 +60,30 @@ export default function ViewOrfanato(){
                 </footer>
             </aside>
             <div className="container-ViewOrfanato">
-                <img src={imgOrfanato} id="image-principal"></img>
+                <img 
+                    src={Orfanato.images[indeximage].url} 
+                    id="image-principal">
+                        
+                </img>
                 <div id="imgs-container">
-                    <button type='button'>
-                        <img src={imgOrfanato}></img>
-                    </button>
-                    <button type='button'>
-                        <img src={imgOrfanato}></img>
-                    </button>
-                    <button type='button'>
-                        <img src={imgOrfanato}></img>
-                    </button>
-                    <button type='button'>
-                        <img src={imgOrfanato}></img>
-                    </button>
-                    <button type='button'>
-                        <img src={imgOrfanato}></img>
-                    </button>
+                    {Orfanato.images.map((image,index) => {
+                        return(
+                            <button 
+                                className={indeximage === index ? 'button-active':''}
+                                key={image.id} 
+                                type='button'
+                                onClick={()=> setindeximage(index)}
+                                >
+                                <img src={image.url} alt={Orfanato.name}></img>
+                            </button>
+                        );
+                    })}
                 </div>
                 <div className="container-map">
-                    <h1>Casa do Bem</h1>
-                    <p>Preste Assistência a crianças em sittuação de risco e vunerabilidade</p>
+                    <h1>{Orfanato.name}</h1>
+                    <p>{Orfanato.about}</p>
                     <Map
-                        center={[-5.8064786,-35.1847402]}
+                        center={[Orfanato.latitude,Orfanato.longitude]}
                         zoom={16}
                         style={{
                             width:'100%',
@@ -68,27 +100,34 @@ export default function ViewOrfanato(){
                         >
                         </TileLayer>
                         <Marker
-                            position={[-5.8064786,-35.1847402]}
+                            position={[Orfanato.latitude,Orfanato.longitude]}
                             icon={Icon}
                         >
                         </Marker>
                     </Map>
                     <footer>
-                        <Link to="">Ver rotas no google Maps</Link>
+                        <a target="_blank" rel="noopener noreferrer" href={`https://www.google.com/maps/dir/?api=1&destination=${Orfanato.latitude},${Orfanato.longitude}`}>Ver rotas no google Maps</a>
                     </footer>
                 </div>
                 <div className="container-contato">
-                    <h1>Instruções para Visita</h1>
-                    <p>Venha visitar o orfanato</p>
+                    <h1>Horário de Visitas</h1>
+                    <p>Venha Visitar o Orfanato</p>
                     <div id="horario-container">
                         <div id="horario-view">
                             <FiClock size={20} color={'#29B6D1'}/><br/>
-                            <p>Horario de funcionamento de segunda a sexta</p>
+                            <p>Atendemos de segunda a sexta das {Orfanato.opening}</p>
                         </div>
-                        <div id="horario-view">
-                            <FiClock size={20} color={'#29B6D1'}/><br/>
-                            <p>Não atendemos final de semana</p>
-                        </div>
+                        {Orfanato.openorfanato ? (
+                                <div id="horario-view">
+                                    <FiClock size={20} color={'#29B6D1'}/><br/>
+                                    <p>atendemos final de semana</p>
+                                </div>
+                        ):(
+                            <div id="not-horario">
+                                <FiClock size={20} color={'#FF669D'}/><br/>
+                                <p>Não atendemos final de semana</p>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <button type='button' id='button-contato'>

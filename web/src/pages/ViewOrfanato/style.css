@@ -1,5 +1,5 @@
 .ViewOrfanato{
-    height: 100vw;
+    min-height: 100vw;
     display: flex;
 }
 .ViewOrfanato aside{
@@ -29,6 +29,7 @@
 }
 .ViewOrfanato .container-ViewOrfanato{
     width: 500px;
+   
     height: auto;
     margin: 50px auto 50px auto;
     padding: 15px;
@@ -37,30 +38,49 @@
 }
 .ViewOrfanato .container-ViewOrfanato #image-principal{
     width: 100%;
-    border-radius: 20px 20px 0px 0px;
+    height: 100%;
     object-fit: cover;
+    border-radius: 20px 20px 0px 0px;
+    max-width: 500px;
+    max-height: 350px;
 }
 .ViewOrfanato .container-ViewOrfanato #imgs-container{
-    width: 100%;
-    height: 50px;
     margin-top: 20px;
     padding: 10px;
     display: grid;
     grid-template-columns: auto auto auto auto auto;
+ 
+    
 }
 .ViewOrfanato .container-ViewOrfanato #imgs-container button{
     display: flex;
+    width: 80px;
+    height: 80px;
+    border-radius: 15px;
     border: none;
-    margin: 5px;
     justify-content: center;
     align-items: center;
-    outline: none;
+    background: transparent;
+    opacity: 0.6;
+}
+.ViewOrfanato .container-ViewOrfanato #imgs-container .button-active{
+    display: flex;
+    width: 80px;
+    height: 80px;
+    border-radius: 15px;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    opacity: 1;
 }
 .ViewOrfanato .container-ViewOrfanato #imgs-container img{
     width: 100%;
-    border-radius: 15px;
+    height: 100%;
+    border-radius: 7px;
     object-fit: cover;
 }
+
 .ViewOrfanato .container-ViewOrfanato h1{
     color: gray;
     text-align: center;
@@ -69,7 +89,7 @@
     color: rgb(153, 153, 153);
     font-weight: 800;
     padding: 10px;
-    font-size: 15px;
+    font-size: 17px;
     text-align: center;
 }
 .ViewOrfanato .container-ViewOrfanato .container-map{
@@ -112,7 +132,16 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    background: linear-gradient(329.54deg,#c1f5ff 0%, #ffffff 100%);
+    background: linear-gradient(329.54deg,#c1f5ff 7.25%, #ffffff 100%);
+    width: 200px;
+    height: 130px;
+    border-radius: 20px;
+}
+.ViewOrfanato .container-ViewOrfanato #horario-container #not-horario{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: linear-gradient(329.54deg,#ffc6c6 7.25%, #ffb6b6 100%);
     width: 200px;
     height: 130px;
     border-radius: 20px;
