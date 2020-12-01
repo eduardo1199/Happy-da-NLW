@@ -22,15 +22,27 @@ interface Orfanato{
     latitude:number;
     longitude:number;
 }
+interface Usuario{
+    name:string;
+    email:string;
+    images:{
+        id:number;
+        url:string;
+    }[];
+}
 
 
 export default function OrfanatoMap(){  
-    const [Orfanato, setOrfanato] = useState<Orfanato[]>([])
+    const [Orfanato, setOrfanato] = useState<Orfanato[]>([]);
+    const [Usuario, setUsuario] = useState<Usuario>();
+
     useEffect(()=>{ 
         api.get('listOrfanatos').then(response => {
            setOrfanato(response.data);
-        })
+        });
+        const cpfUsuario = localStorage.getItem('usuario');
     },[]);
+
     return(
         <div id="container-map">
             <aside>

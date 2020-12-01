@@ -44,6 +44,10 @@
     margin-top: 10px;
     margin-bottom: 15px;
 }
+.cadOrfanato .container-cadOrfanato .map-cadOrfanato h4{
+    color: gray;
+
+}
 .cadOrfanato .container-cadOrfanato .map-cadOrfanato hr{
     margin-bottom: 15px;
     border: solid rgb(223, 223, 223) 0.2px;
@@ -133,6 +137,12 @@
     border-radius: 15px;
     color: gray;
     font-weight: 700;
+}
+.cadOrfanato .container-cadOrfanato .visit-orfanato #button-atentimento button.active{
+    background: rgb(163, 255, 163);
+}
+.cadOrfanato .container-cadOrfanato .visit-orfanato #button-atentimento button.no-active{
+    background:rgb(255, 141, 141);
 }
 .cadOrfanato .container-cadOrfanato #button-cadOrfanato{
     width: 100%;

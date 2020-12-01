@@ -19,6 +19,7 @@ export default function Login(){
     const [senha,setsenha] = useState('');
     const [Usuarios,setUsuarios] = useState<Usuarios[]>([]);
     const [cadastro, setCadastro] = useState(false);
+    const [cpf, setcpf] = useState('');
     const history = useHistory();
     
     
@@ -26,15 +27,20 @@ export default function Login(){
         api.get('listUsuario').then(response => {
             setUsuarios(response.data);
         });
+        localStorage.removeItem('usuario');
     },[]);
     function Login(event: FormEvent<HTMLFormElement>){
         event.preventDefault();
         Usuarios.forEach(usuario => {
             try{
-                if(usuario.senha === senha)
-                history.push({pathname:'/OrfanatoMap', state:{data: usuario}})
+                if(usuario.senha === senha){
+                    if(usuario.CPF === cpf){
+                        localStorage.setItem('usuario', usuario.CPF);
+                        history.push({pathname:'/OrfanatoMap', state:{data: usuario}});
+                    }
+                }
             }catch(err){
-                alert('você não tem cadastro')
+                alert('você não tem cadastro');
             }
         });
     }
@@ -43,6 +49,12 @@ export default function Login(){
             <div id="ajus-login">
                 <img src={imgLogin}></img>
                 <form onSubmit={Login}>
+                    <strong>CPF</strong>
+                    <input
+                        type='CPF'
+                        value={cpf}
+                        onChange={(event) => setcpf(event.target.value)}
+                    ></input>
                     <strong>Senha</strong>
                     <input
                         type="password"
