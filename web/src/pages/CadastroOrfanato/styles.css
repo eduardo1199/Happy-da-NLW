@@ -74,10 +74,9 @@
     justify-content: space-between;
 }
 .cadOrfanato .container-cadOrfanato .map-cadOrfanato #imgs-cadOrfanato{
-    width: 100%;
-    height: auto;
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: repeat(5,1fr);
+    grid-gap: 10px;
 }
 .cadOrfanato .container-cadOrfanato .map-cadOrfanato #imgs-cadOrfanato label{
     display: flex;
@@ -88,6 +87,13 @@
     justify-content: center;
     align-items:center;
 }
+.cadOrfanato .container-cadOrfanato .map-cadOrfanato #imgs-cadOrfanato img{
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
 .cadOrfanato .container-cadOrfanato .map-cadOrfanato #imgs-cadOrfanato #uploadImgsOrfa{
     display: none;
 }

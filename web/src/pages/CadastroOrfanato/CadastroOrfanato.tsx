@@ -1,12 +1,15 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import './styles.css';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {FiArrowLeft} from 'react-icons/fi';
 import {GrFormAdd} from 'react-icons/gr';
 import Logo1 from '../../imags/logo1.svg';
-import leaflet, { Handler, LeafletEvent } from 'leaflet';
+import leaflet, { Handler, LeafletEvent, map } from 'leaflet';
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet';
 import {LeafletMouseEvent} from 'leaflet';
+import OrfanatoMap from '../OrfanatoMap/MapOrfanato';
+import api from '../../services/api';
+import { OperationCanceledException } from 'typescript';
 
 
 const Icon = leaflet.icon({
@@ -23,7 +26,9 @@ export default function CadastroOrfanato(){
     const [instructions, setinstructions] = useState('');
     const [opening, setopening] = useState('');
     const [openorfanato, setopenorfanato] = useState(true);
-
+    const [images, setimages] = useState<File[]>([]);
+    const [Preview, SetPreview] = useState<string[]>([]);
+    const history = useHistory();
     function hadlerMarker(event:LeafletMouseEvent){
         const {lat , lng} = event.latlng;
        setposition({
@@ -31,13 +36,41 @@ export default function CadastroOrfanato(){
            longitude:lng
        })
     }
-    function Cadastro(event:FormEvent){
+    async function Cadastro(event:FormEvent){
         event.preventDefault();
+        const data = new FormData();
+        data.append('name',name);
+        data.append('latitude',String(position.latitude));
+        data.append('longitude',String(position.longitude));
+        data.append('about',about);
+        data.append('instructions',instructions);
+        data.append('opening',opening);
+        data.append('openorfanato',String(openorfanato));
+        
+        images.forEach(images => (
+            data.append('images', images)
+        ))
+        await api.post('cadOrfanatos', data)
+            try{
+                alert('Seu cadastro foi realizado com sucesso')
+                history.push('/');
+            }catch(err){
+                alert('deu erro');
+            }
     }
 
     function handlerImage(event:ChangeEvent<HTMLInputElement>){
-        console.log(event.target.files);
+       if(!event.target.files){
+           return;
+       } //verificando se o campo não é nulo de images
+       const selected = Array.from(event.target.files); //transformar o objeto em um array 
+       setimages(selected);
+       const previewimages = selected.map(images => {
+           return URL.createObjectURL(images);//pegando a URL das images
+       });
+       SetPreview(previewimages);
     }
+
 
     return(
         <div className="cadOrfanato">
@@ -50,7 +83,7 @@ export default function CadastroOrfanato(){
                 </footer>
             </aside>
             <div className="container-cadOrfanato">
-            <form onChange={Cadastro}>
+            <form onSubmit={Cadastro}>
                 <div className="map-cadOrfanato">
                     
                         <h1>Dados</h1>
@@ -91,11 +124,17 @@ export default function CadastroOrfanato(){
                         ></input>
                         <p>Fotos</p>
                         <div id="imgs-cadOrfanato">
+                            {Preview.map(images => {
+                                return(
+                                    <img key={images} src={images} alt={name}></img>
+                                )
+                            })}
                             <label htmlFor='uploadImgsOrfa'>
                                 <GrFormAdd size={25}></GrFormAdd>
                             </label>
                             <input onChange={handlerImage} multiple type='file' id='uploadImgsOrfa'></input>
                         </div>
+                        
                     </div>
                     <div className="visit-orfanato">
                         <h1>Visitação</h1>
@@ -127,7 +166,7 @@ export default function CadastroOrfanato(){
                             >Não</button>
                         </div>
                     </div>
-                    <button type='button' id='button-cadOrfanato'>Cadastrar</button>
+                    <button id='button-cadOrfanato'>Cadastrar</button>
             </form>
         </div>
     </div>

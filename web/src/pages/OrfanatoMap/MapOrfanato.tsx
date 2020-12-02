@@ -22,9 +22,13 @@ interface Orfanato{
     latitude:number;
     longitude:number;
 }
-interface Usuario{
+interface Usuarios{
+    id:number;
     name:string;
+    idade:number;
     email:string;
+    cpf:string;
+    senha:string;
     images:{
         id:number;
         url:string;
@@ -34,21 +38,19 @@ interface Usuario{
 
 export default function OrfanatoMap(){  
     const [Orfanato, setOrfanato] = useState<Orfanato[]>([]);
-    const [Usuario, setUsuario] = useState<Usuario>();
-
-    useEffect(()=>{ 
+    const [Usuarios, setUsuarios] = useState<Usuarios[]>([]);
+    const [user, setuser] = useState<Usuarios>();
+    useEffect(()=>{  
         api.get('listOrfanatos').then(response => {
            setOrfanato(response.data);
         });
-        const cpfUsuario = localStorage.getItem('usuario');
     },[]);
-
     return(
         <div id="container-map">
             <aside>
                 <header>
                     <img src={Logo1}></img>
-                    <h2>Escolha um orfanato no mapa</h2>
+                    <h2></h2>
                     <p>Muitas crianças estão esperando sua visita :D</p>
                 </header>
                 <footer>
