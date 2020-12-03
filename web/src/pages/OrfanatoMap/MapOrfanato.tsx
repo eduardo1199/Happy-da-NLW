@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { SetStateAction, useEffect, useState} from 'react';
 import './styles.css';
 import Logo1 from '../../imags/logo1.svg';
 import {Link} from 'react-router-dom';
-import {useHistory} from 'react-router-dom';
-import {FiPlus, FiArrowRight} from 'react-icons/fi';
-import leaflet from 'leaflet';
+import {FiArrowRight} from 'react-icons/fi';
+import leaflet, { Handler } from 'leaflet';
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'; // ler documentação 
 import 'leaflet/dist/leaflet.css';
 import api from '../../services/api';
-import { inflate } from 'zlib';
+
+
 
 const Icon = leaflet.icon({
     iconUrl: Logo1,
@@ -22,13 +22,10 @@ interface Orfanato{
     latitude:number;
     longitude:number;
 }
-interface Usuarios{
+interface Usuario{
     id:number;
     name:string;
-    idade:number;
     email:string;
-    cpf:string;
-    senha:string;
     images:{
         id:number;
         url:string;
@@ -38,20 +35,51 @@ interface Usuarios{
 
 export default function OrfanatoMap(){  
     const [Orfanato, setOrfanato] = useState<Orfanato[]>([]);
-    const [Usuarios, setUsuarios] = useState<Usuarios[]>([]);
-    const [user, setuser] = useState<Usuarios>();
+    const [Usuario, setUsuario] = useState<Usuario>();
+    const [id, setid] = useState<Number>();
+    const [preview, setpreview] = useState<String>();
+    const [state, setstate] = useState(false);
+
     useEffect(()=>{  
+        const IdUsuario = Number(localStorage.getItem('IdUsuario'));
+        setid(IdUsuario);
         api.get('listOrfanatos').then(response => {
            setOrfanato(response.data);
         });
-    },[]);
+        api.get(`Usuario/${id}`).then(response => {
+            setUsuario(response.data);
+        })
+        
+    },[id]);
+    if(!Usuario){
+        return <h1>Carregando....</h1>
+    }
+
     return(
         <div id="container-map">
+            {state ? (
+                <button onClick={event => setstate(false)} className='poup-perfil'>
+                    <p>{Usuario.name}</p>
+                    <p>{Usuario.email}</p>
+                    {Usuario.images.map(images => {
+                        return (
+                            <img src={images.url}></img>
+                        )
+                    })}
+                    <Link to='/login'>
+                        Sair
+                    </Link>
+                </button>
+            ):(
+                <button onClick={event => setstate(true)} >
+                    <p>{Usuario.name}</p>
+                </button>
+            )}
             <aside>
                 <header>
                     <img src={Logo1}></img>
                     <h2></h2>
-                    <p>Muitas crianças estão esperando sua visita :D</p>
+                    <p>Venha Visitar um Orfanato mais próximo de você :D</p>
                 </header>
                 <footer>
                     <strong>Natal</strong>

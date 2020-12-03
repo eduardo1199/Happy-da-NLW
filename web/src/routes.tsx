@@ -13,7 +13,7 @@ export default function Routes(){
             <Switch>
                 <Route path="/" exact component={Landing}/>
                 <Route path="/login" component={Login}/>
-                <Route path="/OrfanatoMap" component={OrfanatoMap}/>
+                <Route path="/OrfanatoMap/:id" component={OrfanatoMap}/>
                 <Route path="/CadUsuario" component={CadastroUsuario}/>
                 <Route path="/CadOrfanato" component={CadOrfanato}/>
                 <Route path="/ViewOrfanato/:id" component={ViewOrfanato}/>

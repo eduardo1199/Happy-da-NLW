@@ -5,6 +5,44 @@
     position: relative;
     display: flex;
 }
+#container-map .poup-perfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+#container-map .poup-perfil img{
+    max-width: 90px;
+    max-height: 90px;
+    object-fit: cover;
+    margin: 5px;
+    border-radius: 7px;
+}
+#container-map .poup-perfil a{
+    text-decoration: none;
+    background: #15c3d6;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 800;
+}
+#container-map button{
+    display: flex;
+    padding: 10px;
+    outline: none;
+    position: absolute;
+    border-radius: 15px;
+    border:none;
+    right: 0;
+    bottom: 1;
+    margin: 20px;
+    z-index: 10;
+    
+}
+#container-map button p{
+    margin: auto;
+}
 #container-map aside{
     display: flex;
     padding: 50px;

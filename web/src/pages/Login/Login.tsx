@@ -27,7 +27,7 @@ export default function Login(){
         api.get('listUsuario').then(response => {
             setUsuarios(response.data);
         });
-        localStorage.removeItem('usuario');
+        localStorage.removeItem('IdUsuario');
     },[]);
     function Login(event: FormEvent<HTMLFormElement>){
         event.preventDefault();
@@ -35,8 +35,8 @@ export default function Login(){
             try{
                 if(usuario.senha === senha){
                     if(usuario.CPF === cpf){
-                        localStorage.setItem('usuario', usuario.CPF);
-                        history.push({pathname:'/OrfanatoMap', state:{data: usuario}});
+                        localStorage.setItem('IdUsuario', String(usuario.id));
+                        history.push(`/OrfanatoMap/${usuario.id}`);
                     }
                 }
             }catch(err){
