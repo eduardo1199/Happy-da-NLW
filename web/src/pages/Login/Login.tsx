@@ -66,6 +66,9 @@ export default function Login(){
                         <Link to="/CadUsuario" id="Register-User">
                             Fazer Cadastro
                         </Link>
+                        <Link to='/' id="back-User">
+                            Retornar
+                        </Link>
                         <button id="Login-User">
                             <FiLogIn size={25}></FiLogIn>
                         </button>

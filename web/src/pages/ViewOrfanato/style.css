@@ -2,6 +2,48 @@
     min-height: 100vw;
     display: flex;
 }
+.ViewOrfanato .poup-perfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    outline: none;
+    position: absolute;
+    border-radius: 15px;
+    border:none;
+    right: 0;
+    bottom: 1;
+    margin: 20px;
+    background: white;
+}
+.ViewOrfanato .poup-perfil img{
+    max-width: 90px;
+    max-height: 90px;
+    object-fit: cover;
+    margin: 5px;
+    border-radius: 7px;
+}
+.ViewOrfanato .poup-perfil a{
+    text-decoration: none;
+    background: #15c3d6;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 800;
+}
+.ViewOrfanato .button-perfil{
+    display: flex;
+    padding: 10px;
+    outline: none;
+    position: absolute;
+    border-radius: 15px;
+    border:none;
+    right: 0;
+    bottom: 1;
+    margin: 20px;
+    background: white;
+}
 .ViewOrfanato aside{
     display: flex;
     height: 100%;

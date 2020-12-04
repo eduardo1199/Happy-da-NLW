@@ -52,7 +52,11 @@ export default function OrfanatoMap(){
         
     },[id]);
     if(!Usuario){
-        return <h1>Carregando....</h1>
+        return (
+            <div className='loading'>
+                <h1>Carregando....</h1>
+            </div>
+        )
     }
 
     return(

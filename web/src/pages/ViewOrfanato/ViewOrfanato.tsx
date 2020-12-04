@@ -9,6 +9,7 @@ import imgOrfanato from '../../imags/download.jpeg';
 import leaflet from 'leaflet';
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet';
 import api from '../../services/api';
+import { type } from 'os';
 
 
 const Icon = leaflet.icon({
@@ -34,27 +35,61 @@ interface Orfanato{
 interface OrfanatoParms{
     id: string;
 }
+interface Usuario{
+    id:number;
+    name:string;
+    email:string;
+    images:{
+        id:number;
+        url:string;
+    }[];
+}
 
 
 export default function ViewOrfanato(){
     const parms = useParams<OrfanatoParms>();
     const [indeximage, setindeximage] = useState(0);
     const [Orfanato, setOrfanato] = useState<Orfanato>();
+    const [Usuario, setUsuario] = useState<Usuario>();
+    const [id, setId] = useState(0);
+    const [state, setstate] = useState(false)
     useEffect(()=>{ 
+        const IdStorege = Number(localStorage.getItem('IdUsuario'));
+        setId(IdStorege);
         api.get(`listOrfanatos/${parms.id}`).then(response => {
            setOrfanato(response.data);
         })
-    },[parms.id]);
-    if(!Orfanato){
+        api.get(`Usuario/${id}`).then(response => {
+            setUsuario(response.data);
+        })
+    },[parms.id, id]);
+    if(!Orfanato || !Usuario){
         return <p>Carregando...</p>
     }
-    
     return(
         <div className="ViewOrfanato">
+            {state ? (
+                <button onClick={event => setstate(false)} className='poup-perfil'>
+                    <p>{Usuario.name}</p>
+                    <p>{Usuario.email}</p>
+                    {Usuario.images.map(images => {
+                        return (
+                            <img src={images.url}></img>
+                        )
+                    })}
+                    <Link to='/login'>
+                        Sair
+                    </Link>
+                </button>
+            ):(
+                <button className='button-perfil' onClick={event => setstate(true)} >
+                    <p>{Usuario.name}</p>
+                </button>
+            )}
             <aside>
                 <img src={Logo1}></img>
                 <footer>
-                    <Link to="/OrfanatoMap">
+                    <Link to={`/OrfanatoMap/${id}`}>
                         <FiArrowLeft size={22}></FiArrowLeft>
                     </Link>
                 </footer>
@@ -63,7 +98,6 @@ export default function ViewOrfanato(){
                 <img 
                     src={Orfanato.images[indeximage].url} 
                     id="image-principal">
-                        
                 </img>
                 <div id="imgs-container">
                     {Orfanato.images.map((image,index) => {
